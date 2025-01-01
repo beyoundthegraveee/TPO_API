@@ -1,27 +1,21 @@
-Zadanie: klienci usług sieciowych
-Napisać aplikację, udostępniającą GUI, w którym po podanu miasta i nazwy kraju pokazywane są:
-Informacje o aktualnej pogodzie w tym mieście.
-Informacje o kursie wymiany walutu kraju wobec podanej przez uzytkownika waluty.
-Informacje o kursie NBP złotego wobec tej waluty podanego kraju.
-Strona wiki z opisem miasta.
-W p. 1 użyć serwisu api.openweathermap.org, w p. 2 - serwisu open.er-api.com (dok: https://www.exchangerate-api.com/docs/free), w p. 3 - informacji ze stron NBP: https://nbp.pl/statystyka-i-sprawozdawczosc/kursy/tabela-a/ i analogicznie dla tabel B i C.
-W p. 4 użyć klasy WebEngine z JavaFX dla wbudowania przeglądarki w aplikację Swingową.
+Task: network service clients 
+Write an application that provides a GUI in which, after entering the city and country name, the following are displayed: 
+Information about the current weather in this city. 
+Information about the exchange rate of the country's currencies to the currency entered by the user. 
+Information about the NBP exchange rate of the złoty to this currency of the given country. 
+Wiki page with a description of the city. 
+In point 1, use the api.openweathermap.org service, in point 2 - the open.er-api.com service (doc: https://www.exchangerate-api.com/docs/free), in point 3 - information from the NBP website: https://nbp.pl/statystyka-i-głośzosc/kursy/tabela-a/ and similarly for tables B and C. In point 4, use the WebEngine class from JavaFX to embed the browser in the Swing application.
 
-Program winien zawierać klasę Service z konstruktorem Service(String kraj) i metodami::
-String getWeather(String miasto) - zwraca informację o pogodzie w podanym mieście danego kraju w formacie JSON (to ma być pełna informacja uzyskana z serwisu openweather - po prostu tekst w formacie JSON),
-Double getRateFor(String kod_waluty) - zwraca kurs waluty danego kraju wobec waluty podanej jako argument,
-Double getNBPRate() - zwraca kurs złotego wobec waluty danego kraju
-Następujące przykładowa klasa  pokazuje możliwe użycie tych metod:
-public class Main {
-  public static void main(String[] args) {
-    Service s = new Service("Poland");
-    String weatherJson = s.getWeather("Warsaw");
-    Double rate1 = s.getRateFor("USD");
-    Double rate2 = s.getNBPRate();
-    // ...
-    // część uruchamiająca GUI
-  }
+The program should contain a Service class with the Service(String country) constructor and the following methods: 
+String getWeather(String city) - returns weather information in the given city of a given country in JSON format (this should be the full information obtained from the openweather service - just text in JSON format), Double getRateFor(String kod_waluty) - returns the exchange rate of the given country's currency against the currency given as an argument, Double getNBPRate() - returns the Polish zloty exchange rate against the currency of a given country. 
+The following example class shows a possible use of these methods: 
+public class Main { 
+public static void main(String[] args) { 
+Service s = new Service("Poland"); 
+String weatherJson = s.getWeather("Warsaw"); 
+Double rate1 = s.getRateFor("USD"); 
+Double rate2 = s.getNBPRate(); // ... // GUI startup part 
+} 
 }
 
-Uwaga 1: zdefiniowanie pokazanych metod w sposób niezalezny od GUI jest obowiązkowe.
-Uwaga 2:  W katalogu projektu (np. w podkatalogu lib) nalezy umiescic wykorzystywane JARy (w przeciwnym razie program nie przejdzie kompilacji) i skonfigurowac Build Path tak, by wskazania na te JARy byly w Build Path zawarte.
+Note 1: defining the methods shown in a GUI-independent way is mandatory. Note 2: In the project directory (e.g. in the lib subdirectory) you must place the JARs you use (otherwise the program will not compile) and configure the Build Path so that the pointers to these JARs are included in the Build Path.
